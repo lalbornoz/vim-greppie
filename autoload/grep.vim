@@ -1,13 +1,14 @@
 " File: grep.vim
-" Author: Yegappan Lakshmanan (yegappan AT yahoo DOT com)
-" Version: 2.2
-" Last Modified: June 14, 2020
+" Author: Yegappan Lakshmanan  (yegappan AT yahoo DOT com), Lucía Andrea Illanes Albornoz  (lucia AT luciaillanes DOT de)
+" Version: 3.1
+" Last Modified: March 5, 2023
 " 
 " Plugin to integrate grep like utilities with Vim
 " Supported utilities are: grep, fgrep, egrep, agrep, findstr, ag, ack,
 " ripgrep, git grep, sift, platinum searcher and universal code grep.
 "
 " License: MIT License
+" Copyright (c) 2023 Lucía Andrea Illanes Albornoz
 " Copyright (c) 2002-2020 Yegappan Lakshmanan
 "
 " Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -383,11 +384,11 @@ func! grep#cmd_output_cb(qf_id, channel, msg) abort
 	endif
 
 	call setqflist([], 'a', {'id' : a:qf_id,
-		    \ 'efm' : '%f:%\\s%#%l:%c:%m,%f:%\s%#%l:%m',
+		    \ 'efm' : '%o:%\\s%#%l:%c:%m,%o:%\s%#%l:%m',
 		    \ 'lines' : [a:msg]})
     else
 	let old_efm = &efm
-	set efm=%f:%\\s%#%l:%c:%m,%f:%\\s%#%l:%m
+	set efm=%o:%\\s%#%l:%c:%m,%o:%\\s%#%l:%m
 	caddexpr a:msg . "\n"
 	let &efm = old_efm
     endif
@@ -476,6 +477,46 @@ func! s:runGrepCmdAsync(cmd, pattern, action) abort
     if g:Grep_OpenQuickfixWindow == 1
 	" Open the quickfix window below the current window
 	botright copen
+        call s:mapBufferKeys()
+    endif
+endfunc
+
+" mapBufferKeys()
+" Maps key sequences in current buffer
+func! s:mapBufferKeys() abort
+    noremap <buffer> <Enter> :<C-U>call <SID>openInWindow(0, 1, 0)<CR>
+    noremap <buffer> o :<C-U>call <SID>openInWindow(0, 1, 0)<CR>
+    noremap <buffer> <Alt>o :<C-U>call <SID>openInWindow(1, 1, 0)<CR>
+    noremap <buffer> s :<C-U>call <SID>openInWindow(0, 0, 0)<CR>
+    noremap <buffer> <Alt>s :<C-U>call <SID>openInWindow(1, 0, 0)<CR>
+    noremap <buffer> S :<C-U>call <SID>openInWindow(0, 0, 1)<CR>
+    noremap <buffer> <Alt>S :<C-U>call <SID>openInWindow(1, 0, 1)<CR>
+endfunc
+
+" openInWindow()
+" Opens file at line number from current line in grep output window w/ optional
+" auto-close of the same (closefl=1) and in current window (currentfl=1) or a new
+" split window (verticalfl=0) or vertical split window (verticalfl=1)
+func! s:openInWindow(closefl, currentfl, verticalfl) abort
+    let linenr = line(".")
+    let item = getqflist({'id': 0, 'items': 0}).items[linenr - 1]
+
+    if a:currentfl
+        execute("wincmd k")
+    else
+        if a:verticalfl
+            vnew
+        else
+            new
+        endif
+    endif
+
+    execute("e! " . item['module'])
+    execute("normal! " . item['lnum'] . "G")
+    execute("normal! zt")
+
+    if a:closefl
+        cclose
     endif
 endfunc
 

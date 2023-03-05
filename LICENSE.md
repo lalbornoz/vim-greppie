@@ -1,5 +1,6 @@
 MIT License
 
+Copyright (c) 2023 Lucía Andrea Illanes Albornoz
 Copyright (c) 2002-2018 Yegappan Lakshmanan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

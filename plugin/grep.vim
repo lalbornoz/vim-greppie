@@ -1,13 +1,14 @@
 " File: grep.vim
-" Author: Yegappan Lakshmanan (yegappan AT yahoo DOT com)
-" Version: 2.2
-" Last Modified: May 26, 2018
+" Author: Yegappan Lakshmanan  (yegappan AT yahoo DOT com), Lucía Andrea Illanes Albornoz  (lucia AT luciaillanes DOT de)
+" Version: 3.1
+" Last Modified: March 5, 2023
 " 
 " Plugin to integrate grep like utilities with Vim
 " Supported utilities are: grep, fgrep, egrep, agrep, findstr, ag, ack,
 " ripgrep, git grep, sift, platinum searcher and universal code grep
 "
 " License: MIT License
+" Copyright (c) 2023 Lucía Andrea Illanes Albornoz
 " Copyright (c) 2002-2018 Yegappan Lakshmanan
 "
 " Permission is hereby granted, free of charge, to any person obtaining a copy

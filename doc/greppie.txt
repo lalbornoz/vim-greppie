@@ -1,12 +1,13 @@
-*grep.txt*	Plugin for integrating grep like tools with Vim
+*vim-greppie.txt*	Plugin for integrating grep like tools with Vim
 
-Author: Yegappan Lakshmanan  (yegappan AT yahoo DOT com)
+Author: Yegappan Lakshmanan  (yegappan AT yahoo DOT com), Lucía Andrea Illanes Albornoz  (lucia AT luciaillanes DOT de)
 For Vim version 7.0 and above
-Last change: May 26, 2018
+Last change: March 5, 2023
 
 ==============================================================================
-						*grep-license*
+						*vim-greppie-license*
 License: MIT License
+Copyright (c) 2023 Lucía Andrea Illanes Albornoz
 Copyright (c) 2002-2018 Yegappan Lakshmanan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,13 +30,14 @@ IN THE SOFTWARE.
 ==============================================================================
 CONTENTS~
 
-1. Overview					|grep-overview|
-2. Installation					|grep-installation|
-3. Usage					|grep-usage|
-4. Configuration				|grep-configuration|
+1. Overview					|vim-greppie-overview|
+2. Installation					|vim-greppie-installation|
+3. Usage					|vim-greppie-usage|
+4. Configuration				|vim-greppie-configuration|
+5. Key mappings in output window		|vim-greppie-key-mappings|
 
 ==============================================================================
-						*grep-overview*
+						*vim-greppie-overview*
 1. Overview~
 
 The grep plugin integrates grep like utilities (grep, fgrep, egrep, agrep,
@@ -102,7 +104,7 @@ using any other additional utilities like find and xargs.
 The github repository for this plugin is at https://github.com/yegappan/grep
 
 ==============================================================================
-						*grep-installation*
+						*vim-greppie-installation*
 2. Installation~
 
 You can use any one of the Vim plugin managers (dein.vim, pathogen, vam,
@@ -123,10 +125,10 @@ using the following steps.
    files.
 
 ==============================================================================
-						*grep-usage*
+						*vim-greppie-usage*
 3. Usage~
 
-The grep.vim plugin introduces the following Vim commands:
+The vim-greppie.vim plugin introduces the following Vim commands:
 
 :Grep          - Search for the specified pattern in the specified files
 :GrepAdd       - Same as ":Grep" but adds the results to the current results
@@ -321,7 +323,7 @@ list. In the meantime, Vim will be slow to respond or may not respond to
 keystrokes.
 
 ==============================================================================
-						*grep-configuration*
+						*vim-greppie-configuration*
 4. Configuration~
 
 By changing the following variables you can configure the behavior of this
@@ -490,6 +492,26 @@ The 'Grep_Run_Async' variable specifies whether the grep commands are run
 synchronously or asynchronously. Depending on the Vim version, this variable
 is set automatically.  If you want to force Vim to run the grep commands
 synchronously, then you can set the 'Grep_Run_Async' variable to 1.
+
+==============================================================================
+						*vim-greppie-key-mappings*
+5. Key mappings in output window~
+
+The following key mappings are available in the Grep output window:
+
+<Enter>         Open currently selected search result in previous window.
+o               Open currently selected search result in previous window.
+<Alt>o          Open currently selected search result in previous window
+                and close Grep output window.
+
+s               Open currently selected search result in new split window.
+<Alt>s          Open currently selected search result in new split window
+                and close Grep output window.
+
+S               Open currently selected search result in new vertically split
+                window.
+<Alt>S          Open currently selected search result in new vertically split
+                window and close Grep output window.
 
 ==============================================================================
 

@@ -1,5 +1,10 @@
-grep
-====
+vim-greppie
+===========
+
+Fork of <https://github.com/yegappan/grep/fork> implementing the following
+additional features:
+
+1) Implements key mappings in Grep output window.
 
 Plugin to integrate various grep like search tools with Vim.
 
