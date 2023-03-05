@@ -384,11 +384,11 @@ func! grep#cmd_output_cb(qf_id, channel, msg) abort
 	endif
 
 	call setqflist([], 'a', {'id' : a:qf_id,
-		    \ 'efm' : '%o:%\\s%#%l:%c:%m,%o:%\s%#%l:%m',
+		    \ 'efm' : '%f:%\s%#%l:%m',
 		    \ 'lines' : [a:msg]})
     else
 	let old_efm = &efm
-	set efm=%o:%\\s%#%l:%c:%m,%o:%\\s%#%l:%m
+	set efm=%f:%\\s%#%l:%m
 	caddexpr a:msg . "\n"
 	let &efm = old_efm
     endif
@@ -499,6 +499,7 @@ endfunc
 func! s:openInWindow(closefl, currentfl, verticalfl) abort
     let linenr = line(".")
     let item = getqflist({'id': 0, 'items': 0}).items[linenr - 1]
+    let fname = bufname(item['bufnr'])
 
     if a:currentfl
         execute("wincmd k")
@@ -510,7 +511,7 @@ func! s:openInWindow(closefl, currentfl, verticalfl) abort
         endif
     endif
 
-    execute("e! " . item['module'])
+    execute("e! " . fname)
     execute("normal! " . item['lnum'] . "G")
     execute("normal! zt")
 
