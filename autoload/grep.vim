@@ -484,13 +484,12 @@ endfunc
 " mapBufferKeys()
 " Maps key sequences in current buffer
 func! s:mapBufferKeys() abort
-    noremap <buffer> <Enter> :<C-U>call <SID>openInWindow(0, 1, 0)<CR>
-    noremap <buffer> o :<C-U>call <SID>openInWindow(0, 1, 0)<CR>
-    noremap <buffer> <Alt>o :<C-U>call <SID>openInWindow(1, 1, 0)<CR>
-    noremap <buffer> s :<C-U>call <SID>openInWindow(0, 0, 0)<CR>
-    noremap <buffer> <Alt>s :<C-U>call <SID>openInWindow(1, 0, 0)<CR>
-    noremap <buffer> S :<C-U>call <SID>openInWindow(0, 0, 1)<CR>
-    noremap <buffer> <Alt>S :<C-U>call <SID>openInWindow(1, 0, 1)<CR>
+    noremap <buffer> <Plug>(OpenGrepResult) :<C-U>call <SID>openInWindow(0, 1, 0)<CR>
+    noremap <buffer> <Plug>(OpenGrepResultCloseQuickfix) :<C-U>call <SID>openInWindow(1, 1, 0)<CR>
+    noremap <buffer> <Plug>(OpenGrepResultSplit) :<C-U>call <SID>openInWindow(0, 0, 0)<CR>
+    noremap <buffer> <Plug>(OpenGrepResultSplitCloseQuickfix) :<C-U>call <SID>openInWindow(1, 0, 0)<CR>
+    noremap <buffer> <Plug>(OpenGrepResultVSplit) :<C-U>call <SID>openInWindow(0, 0, 1)<CR>
+    noremap <buffer> <Plug>(OpenGrepResultVSplitCloseQuickfix) :<C-U>call <SID>openInWindow(1, 0, 1)<CR>
 endfunc
 
 " openInWindow()

@@ -497,21 +497,40 @@ synchronously, then you can set the 'Grep_Run_Async' variable to 1.
 						*vim-greppie-key-mappings*
 5. Key mappings in output window~
 
-The following key mappings are available in the Grep output window:
+The following plugin-specific mappings local to output windows are available;
+no defaults are provided:
 
-<Enter>         Open currently selected search result in previous window.
-o               Open currently selected search result in previous window.
-<Alt>o          Open currently selected search result in previous window
-                and close Grep output window.
+<Plug>(OpenGrepResult)
+Open currently selected search result in previous window.
 
-s               Open currently selected search result in new split window.
-<Alt>s          Open currently selected search result in new split window
-                and close Grep output window.
+<Plug>(OpenGrepResultCloseQuickfix)
+Open currently selected search result in previous window
+and close Grep output window.
 
-S               Open currently selected search result in new vertically split
-                window.
-<Alt>S          Open currently selected search result in new vertically split
-                window and close Grep output window.
+<Plug>(OpenGrepResultSplit)
+Open currently selected search result in new split window.
+
+<Plug>(OpenGrepResultSplitCloseQuickfix)
+Open currently selected search result in new split window
+and close Grep output window.
+
+<Plug>(OpenGrepResultVSplit)
+Open currently selected search result in new vertically split
+window.
+
+<Plug>(OpenGrepResultVSplitCloseQuickfix)
+Open currently selected search result in new vertically split
+window and close Grep output window.
+
+These may be mapped in your .vimrc or any other file included thereby by e.g.:
+
+map <Enter>	<Plug>(OpenGrepResult)
+map o		<Plug>(OpenGrepResult)
+map <Alt>o	<Plug>(OpenGrepResultCloseQuickfix)
+map s		<Plug>(OpenGrepResultSplit)
+map <Alt>s	<Plug>(OpenGrepResultSplitCloseQuickfix)
+map S		<Plug>(OpenGrepResultVSplit)
+map <Alt>S	<Plug>(OpenGrepResultVSplitCloseQuickfix)
 
 ==============================================================================
 
