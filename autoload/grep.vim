@@ -668,7 +668,12 @@ func! s:formFullCmd(cmd_name, useropts, pattern, filenames) abort
 		\ a:pattern
 
     if a:filenames != ''
-	let fullcmd = fullcmd . ' ' . a:filenames
+	let filenames = shellescape(a:filenames)
+	let filenames = substitute(filenames, '\(\\\)\@<!\(\*\*\|\*\)', '''\2''', 'g')
+	let filenames = substitute(filenames, '\\\(\*\*\|\*\)', '\1', 'g')
+	let filenames = substitute(filenames, '\(\\\)\@<!\([?~]\)', '''\2''', 'g')
+	let filenames = substitute(filenames, '\\\([?~]\)', '\1', 'g')
+	let fullcmd = fullcmd . ' ' . filenames
     endif
 
     if s:cmdTable[a:cmd_name].nulldev != ''
