@@ -249,7 +249,7 @@ let s:cmdTable = {
 	    \   'grep' : {
 	    \     'cmdpath' : g:Grep_Path,
 	    \     'optprefix' : '-',
-	    \     'defopts' : '-s -n',
+	    \     'defopts' : '-s -n -f -',
 	    \     'opts' : g:Grep_Options,
 	    \     'expropt' : '--',
 	    \     'nulldev' : g:Grep_Null_Device
@@ -257,7 +257,7 @@ let s:cmdTable = {
 	    \   'fgrep' : {
 	    \     'cmdpath' : g:Fgrep_Path,
 	    \     'optprefix' : '-',
-	    \     'defopts' : '-s -n',
+	    \     'defopts' : '-s -n -f -',
 	    \     'opts' : g:Fgrep_Options,
 	    \     'expropt' : '-e',
 	    \     'nulldev' : g:Grep_Null_Device
@@ -265,7 +265,7 @@ let s:cmdTable = {
 	    \   'egrep' : {
 	    \     'cmdpath' : g:Egrep_Path,
 	    \     'optprefix' : '-',
-	    \     'defopts' : '-s -n',
+	    \     'defopts' : '-s -n -f -',
 	    \     'opts' : g:Egrep_Options,
 	    \     'expropt' : '-e',
 	    \     'nulldev' : g:Grep_Null_Device
@@ -431,7 +431,7 @@ endfunc
 
 " runGrepCmdAsync()
 " Run the grep command asynchronously
-func! s:runGrepCmdAsync(cmd, pattern, action) abort
+func! s:runGrepCmdAsync(cmd_name, cmd, pattern, action) abort
     if s:grep_cmd_job isnot 0
 	" If the job is already running for some other search, stop it.
 	call job_stop(s:grep_cmd_job)
@@ -464,13 +464,19 @@ func! s:runGrepCmdAsync(cmd, pattern, action) abort
 		\ {'callback' : function('grep#cmd_output_cb', [qf_id]),
 		\ 'close_cb' : function('grep#chan_close_cb', [qf_id]),
 		\ 'exit_cb' : function('grep#cmd_exit_cb', [qf_id]),
-		\ 'in_io' : 'null'})
+		\ 'in_io' : 'pipe'})
 
     if job_status(s:grep_cmd_job) == 'fail'
 	let s:grep_cmd_job = 0
 	call s:warnMsg('Error: Failed to start the grep command')
 	call s:deleteTempFile()
 	return
+    endif
+
+    if has_key({'Grep': 0, 'Egrep': 0, 'Fgrep': 0}, a:cmd_name)
+        let channel = job_getchannel(s:grep_cmd_job)
+        call ch_sendraw(channel, a:pattern)
+        call ch_close_in(channel)
     endif
 
     " Open the grep output window
@@ -522,7 +528,7 @@ endfunc
 
 " runGrepCmd()
 " Run the specified grep command using the supplied pattern
-func! s:runGrepCmd(cmd, pattern, action) abort
+func! s:runGrepCmd(cmd_name, cmd, pattern, action) abort
     if has('win32') && !has('win32unix') && (&shell =~ 'cmd.exe')
 	" Windows does not correctly deal with commands that have more than 1
 	" set of double quotes.  It will strip them all resulting in:
@@ -534,7 +540,7 @@ func! s:runGrepCmd(cmd, pattern, action) abort
 	call writefile(['@echo off', a:cmd], s:grep_tempfile)
 
 	if g:Grep_Run_Async
-	    call s:runGrepCmdAsync(s:grep_tempfile, a:pattern, a:action)
+	    call s:runGrepCmdAsync(a:cmd_name, s:grep_tempfile, a:pattern, a:action)
 	    return
 	endif
 	let cmd_output = system('"' . s:grep_tempfile . '"')
@@ -545,7 +551,7 @@ func! s:runGrepCmd(cmd, pattern, action) abort
 	endif
     else
 	if g:Grep_Run_Async
-	    return s:runGrepCmdAsync(a:cmd, a:pattern, a:action)
+	    return s:runGrepCmdAsync(a:cmd_name, a:cmd, a:pattern, a:action)
 	endif
 	let cmd_output = system(a:cmd)
     endif
@@ -663,9 +669,14 @@ func! s:formFullCmd(cmd_name, useropts, pattern, filenames) abort
 	let cmdopt = cmdopt . ' ' . s:cmdTable[a:cmd_name].expropt
     endif
 
-    let fullcmd = s:cmdTable[a:cmd_name].cmdpath . ' ' .
-		\ cmdopt . ' ' .
-		\ a:pattern
+    if has_key({'grep': 0, 'egrep': 0, 'fgrep': 0}, a:cmd_name)
+        let fullcmd = s:cmdTable[a:cmd_name].cmdpath . ' ' .
+		    \ cmdopt
+    else
+        let fullcmd = s:cmdTable[a:cmd_name].cmdpath . ' ' .
+		    \ cmdopt . ' ' .
+		    \ a:pattern
+    endif
 
     if a:filenames != ''
 	let filenames = shellescape(a:filenames)
@@ -836,7 +847,7 @@ func! grep#runGrepRecursive(cmd_name, grep_cmd, action, ...) abort
 		    \ g:Grep_Shell_Escape_Char . ';'
     endif
 
-    call s:runGrepCmd(cmd, pattern, a:action)
+    call s:runGrepCmd(a:cmd_name, cmd, pattern, a:action)
 endfunc
 
 " grep#runGrepSpecial()
@@ -889,7 +900,7 @@ func! grep#runGrepSpecial(cmd_name, which, action, ...) abort
 
     " Form the complete command line and run it
     let cmd = s:formFullCmd(grep_cmd, opts, pattern, filenames)
-    call s:runGrepCmd(cmd, pattern, a:action)
+    call s:runGrepCmd(a:cmd_name, cmd, pattern, a:action)
 endfunc
 
 " grep#runGrep()
@@ -925,7 +936,7 @@ func! grep#runGrep(cmd_name, grep_cmd, action, ...) abort
 
     " Form the complete command line and run it
     let cmd = s:formFullCmd(a:grep_cmd, opts, pattern, filenames)
-    call s:runGrepCmd(cmd, pattern, a:action)
+    call s:runGrepCmd(a:cmd_name, cmd, pattern, a:action)
 endfunc
 
 " restore 'cpo'
