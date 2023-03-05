@@ -113,9 +113,9 @@ vim-plug, volt, Vundle, etc.) to install and manage this plugin.
 Alternatively, you can also manually download and install the plugin
 using the following steps. 
 
-1. Download the grep.zip file from the https://vim.sourceforge.io site. 
-2. Expand the grep.zip file to the $HOME/.vim/plugin or
-   $HOME/vimfiles/plugin or $VIM/vimfiles/plugin directory.
+1. Clone the https://github.com/lalbornoz/vim-greppie Git repository into
+   the $HOME/.vim/plugin or $HOME/vimfiles/plugin or $VIM/vimfiles/plugin
+   or $HOME/.vim/bundle directory.
 3. If the grep executables are not already present in one of the directories
    in the PATH environment variable, then set the Grep_Path and other _Path
    variables to point to the location of the grep utilities in the .vimrc
