@@ -5,6 +5,7 @@ Fork of <https://github.com/yegappan/grep/fork> implementing the following
 additional features:
 
 1) Implements key mappings in Grep output window.
+2) Merges <https://github.com/yegappan/grep/pull/10>. 
 
 Plugin to integrate various grep like search tools with Vim.
 
