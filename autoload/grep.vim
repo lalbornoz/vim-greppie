@@ -601,14 +601,8 @@ func! s:getListOfBufferNames() abort
     " Get a list of all the buffer names
     for i in range(1, bufnr("$"))
 	if bufexists(i) && buflisted(i)
-	    let fullpath = fnamemodify(bufname(i), ':p')
-	    if filereadable(fullpath)
-		if v:version >= 702
-		    let filenames = filenames . ' ' . fnameescape(fullpath)
-		else
-		    let filenames = filenames . ' ' . fullpath
-		endif
-	    endif
+	    let fullpath = fnamemodify(bufname(i), ':p:S')
+	    let filenames = filenames . ' ' . fullpath
 	endif
     endfor
 
@@ -623,7 +617,7 @@ func! s:getListOfArgFiles() abort
     let arg_cnt = argc()
     if arg_cnt != 0
 	for i in range(0, arg_cnt - 1)
-	    let filenames = filenames . ' ' . argv(i)
+	    let filenames = filenames . ' ' . shellescape(argv(i))
 	endfor
     endif
 
