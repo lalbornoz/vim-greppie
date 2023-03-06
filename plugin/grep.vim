@@ -1,7 +1,7 @@
 " File: grep.vim
 " Author: Yegappan Lakshmanan  (yegappan AT yahoo DOT com), Lucía Andrea Illanes Albornoz  (lucia AT luciaillanes DOT de)
-" Version: 3.1
-" Last Modified: March 5, 2023
+" Version: 3.11
+" Last Modified: March 6, 2023
 " 
 " Plugin to integrate grep like utilities with Vim
 " Supported utilities are: grep, fgrep, egrep, agrep, findstr, ag, ack,
@@ -47,110 +47,110 @@ set cpo&vim
 
 " grep commands
 command! -nargs=* -complete=file Grep
-	\ call grep#runGrep('Grep', 'grep', 'set', <f-args>)
+	\ call grep#runGrep('Grep', 'grep', 'set', <q-args>)
 command! -nargs=* -complete=file Rgrep
-	\ call grep#runGrepRecursive('Rgrep', 'grep', 'set', <f-args>)
+	\ call grep#runGrepRecursive('Rgrep', 'grep', 'set', <q-args>)
 command! -nargs=* -complete=file GrepAdd
-	\ call grep#runGrep('GrepAdd', 'grep', 'add', <f-args>)
+	\ call grep#runGrep('GrepAdd', 'grep', 'add', <q-args>)
 command! -nargs=* -complete=file RgrepAdd
-	\ call grep#runGrepRecursive('RgrepAdd', 'grep', 'add', <f-args>)
+	\ call grep#runGrepRecursive('RgrepAdd', 'grep', 'add', <q-args>)
 
 " fgrep commands
 command! -nargs=* -complete=file Fgrep
-	\ call grep#runGrep('Fgrep', 'fgrep', 'set', <f-args>)
+	\ call grep#runGrep('Fgrep', 'fgrep', 'set', <q-args>)
 command! -nargs=* -complete=file Rfgrep
-	\ call grep#runGrepRecursive('Rfgrep', 'fgrep', 'set', <f-args>)
+	\ call grep#runGrepRecursive('Rfgrep', 'fgrep', 'set', <q-args>)
 command! -nargs=* -complete=file FgrepAdd
-	\ call grep#runGrep('FgrepAdd', 'fgrep', 'add', <f-args>)
+	\ call grep#runGrep('FgrepAdd', 'fgrep', 'add', <q-args>)
 command! -nargs=* -complete=file RfgrepAdd
-	\ call grep#runGrepRecursive('RfgrepAdd', 'fgrep', 'add', <f-args>)
+	\ call grep#runGrepRecursive('RfgrepAdd', 'fgrep', 'add', <q-args>)
 
 " egrep commands
 command! -nargs=* -complete=file Egrep
-	\ call grep#runGrep('Egrep', 'egrep', 'set', <f-args>)
+	\ call grep#runGrep('Egrep', 'egrep', 'set', <q-args>)
 command! -nargs=* -complete=file Regrep
-	\ call grep#runGrepRecursive('Regrep', 'egrep', 'set', <f-args>)
+	\ call grep#runGrepRecursive('Regrep', 'egrep', 'set', <q-args>)
 command! -nargs=* -complete=file EgrepAdd
-	\ call grep#runGrep('EgrepAdd', 'egrep', 'add', <f-args>)
+	\ call grep#runGrep('EgrepAdd', 'egrep', 'add', <q-args>)
 command! -nargs=* -complete=file RegrepAdd
-	\ call grep#runGrepRecursive('RegrepAdd', 'egrep', 'add', <f-args>)
+	\ call grep#runGrepRecursive('RegrepAdd', 'egrep', 'add', <q-args>)
 
 " agrep commands
 command! -nargs=* -complete=file Agrep
-	\ call grep#runGrep('Agrep', 'agrep', 'set', <f-args>)
+	\ call grep#runGrep('Agrep', 'agrep', 'set', <q-args>)
 command! -nargs=* -complete=file Ragrep
-	\ call grep#runGrepRecursive('Ragrep', 'agrep', 'set', <f-args>)
+	\ call grep#runGrepRecursive('Ragrep', 'agrep', 'set', <q-args>)
 command! -nargs=* -complete=file AgrepAdd
-	\ call grep#runGrep('AgrepAdd', 'agrep', 'add', <f-args>)
+	\ call grep#runGrep('AgrepAdd', 'agrep', 'add', <q-args>)
 command! -nargs=* -complete=file RagrepAdd
-	\ call grep#runGrepRecursive('RagrepAdd', 'agrep', 'add', <f-args>)
+	\ call grep#runGrepRecursive('RagrepAdd', 'agrep', 'add', <q-args>)
 
 " Silver Searcher (ag) commands
 command! -nargs=* -complete=file Ag
-	    \ call grep#runGrep('Ag', 'ag', 'set', <f-args>)
+	    \ call grep#runGrep('Ag', 'ag', 'set', <q-args>)
 command! -nargs=* -complete=file AgAdd
-	\ call grep#runGrep('AgAdd', 'ag', 'add', <f-args>)
+	\ call grep#runGrep('AgAdd', 'ag', 'add', <q-args>)
 
 " Ripgrep (rg) commands
 command! -nargs=* -complete=file Rg
-	    \ call grep#runGrep('Rg', 'rg', 'set', <f-args>)
+	    \ call grep#runGrep('Rg', 'rg', 'set', <q-args>)
 command! -nargs=* -complete=file RgAdd
-	\ call grep#runGrep('RgAdd', 'rg', 'add', <f-args>)
+	\ call grep#runGrep('RgAdd', 'rg', 'add', <q-args>)
 
 " ack commands
 command! -nargs=* -complete=file Ack
-	    \ call grep#runGrep('Ack', 'ack', 'set', <f-args>)
+	    \ call grep#runGrep('Ack', 'ack', 'set', <q-args>)
 command! -nargs=* -complete=file AckAdd
-	\ call grep#runGrep('AckAdd', 'ack', 'add', <f-args>)
+	\ call grep#runGrep('AckAdd', 'ack', 'add', <q-args>)
 
 " git grep commands
 command! -nargs=* -complete=file Gitgrep
-	    \ call grep#runGrep('Gitgrep', 'git', 'set', <f-args>)
+	    \ call grep#runGrep('Gitgrep', 'git', 'set', <q-args>)
 command! -nargs=* -complete=file GitgrepAdd
-	\ call grep#runGrep('GitgrepAdd', 'git', 'add', <f-args>)
+	\ call grep#runGrep('GitgrepAdd', 'git', 'add', <q-args>)
 
 " sift commands
 command! -nargs=* -complete=file Sift
-	    \ call grep#runGrep('Sift', 'sift', 'set', <f-args>)
+	    \ call grep#runGrep('Sift', 'sift', 'set', <q-args>)
 command! -nargs=* -complete=file SiftAdd
-	\ call grep#runGrep('SiftAdd', 'sift', 'add', <f-args>)
+	\ call grep#runGrep('SiftAdd', 'sift', 'add', <q-args>)
 
 " Platinum Searcher commands
 command! -nargs=* -complete=file Ptgrep
-	    \ call grep#runGrep('Ptgrep', 'pt', 'set', <f-args>)
+	    \ call grep#runGrep('Ptgrep', 'pt', 'set', <q-args>)
 command! -nargs=* -complete=file PtgrepAdd
-	\ call grep#runGrep('PtgrepAdd', 'pt', 'add', <f-args>)
+	\ call grep#runGrep('PtgrepAdd', 'pt', 'add', <q-args>)
 
 " Universal Code Grep commands
 command! -nargs=* -complete=file Ucgrep
-	    \ call grep#runGrep('Ucgrep', 'ucg', 'set', <f-args>)
+	    \ call grep#runGrep('Ucgrep', 'ucg', 'set', <q-args>)
 command! -nargs=* -complete=file UcgrepAdd
-	\ call grep#runGrep('UcgrepAdd', 'ucg', 'add', <f-args>)
+	\ call grep#runGrep('UcgrepAdd', 'ucg', 'add', <q-args>)
 
 
 " findstr commands
 if has('win32')
     command! -nargs=* -complete=file Findstr
-		\ call grep#runGrep('Findstr', 'findstr', 'set', <f-args>)
+		\ call grep#runGrep('Findstr', 'findstr', 'set', <q-args>)
     command! -nargs=* -complete=file FindstrAdd
-	    \ call grep#runGrep('FindstrAdd', 'findstr', 'add', <f-args>)
+	    \ call grep#runGrep('FindstrAdd', 'findstr', 'add', <q-args>)
 endif
 
 " Buffer list grep commands
 command! -nargs=* GrepBuffer
-	\ call grep#runGrepSpecial('GrepBuffer', 'buffer', 'set', <f-args>)
+	\ call grep#runGrepSpecial('GrepBuffer', 'buffer', 'set', <q-args>)
 command! -nargs=* Bgrep
-	\ call grep#runGrepSpecial('Bgrep', 'buffer', 'set', <f-args>)
+	\ call grep#runGrepSpecial('Bgrep', 'buffer', 'set', <q-args>)
 command! -nargs=* GrepBufferAdd
-	\ call grep#runGrepSpecial('GrepBufferAdd', 'buffer', 'add', <f-args>)
+	\ call grep#runGrepSpecial('GrepBufferAdd', 'buffer', 'add', <q-args>)
 command! -nargs=* BgrepAdd
-	\ call grep#runGrepSpecial('BgrepAdd', 'buffer', 'add', <f-args>)
+	\ call grep#runGrepSpecial('BgrepAdd', 'buffer', 'add', <q-args>)
 
 " Argument list grep commands
 command! -nargs=* GrepArgs
-	\ call grep#runGrepSpecial('GrepArgs', 'args', 'set', <f-args>)
+	\ call grep#runGrepSpecial('GrepArgs', 'args', 'set', <q-args>)
 command! -nargs=* GrepArgsAdd
-	\ call grep#runGrepSpecial('GrepArgsAdd', 'args', 'add', <f-args>)
+	\ call grep#runGrepSpecial('GrepArgsAdd', 'args', 'add', <q-args>)
 
 " Add the Tools->Search Files menu
 if has('gui_running')

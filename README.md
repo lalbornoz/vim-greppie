@@ -5,8 +5,25 @@ Fork of <https://github.com/yegappan/grep/fork> implementing the following
 additional features:
 
 1) Implements key mappings in Grep output window.
-2) Merges <https://github.com/yegappan/grep/pull/10>. 
-3) Escapes filenames, excluding \*\*, \*, and [?~].
+2) Directly pass command lines to shell unchanged.
+
+This fixes the following upstream issues:
+<https://github.com/yegappan/grep/issues/9>
+<https://github.com/yegappan/grep/issues/11>
+<https://github.com/yegappan/grep/issues/17>
+
+Removes find and xargs dependencies.
+    
+Removes the following features/options:  
+Prompting for \<search_pattern\> if not specified  
+Prompting for \<file_names\> if not specified  
+Grep\_Find\_Path  
+Grep\_Xargs\_Path  
+Grep\_Default\_Filelist  
+Grep\_Find\_Use\_Xargs  
+Grep\_Xargs\_Options  
+Grep\_Cygwin\_Find  
+Grep\_Shell\_Escape\_Char
 
 Plugin to integrate various grep like search tools with Vim.
 
