@@ -209,6 +209,9 @@ The above commands can be invoked like this:
     :BgrepAdd [<grep_options>] <search_pattern>
     :GrepArgsAdd [<grep_options>] <search_pattern>
 
+N.B.	Due to Vim limitations, filenames containing special Shell characters
+	such as: &, (, ), *, ?, [, ], `, $ must be escaped manually.
+
 In the above commands, all the arguments are optional.
 
 You can specify grep options like -i (ignore case) or -w (search for a word)
