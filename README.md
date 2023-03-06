@@ -43,13 +43,11 @@ features, but you can still use the rest of the features supported by the
 plugin.
 
 To use the this plugin with grep, you will need the grep, fgrep and egrep
-utilities. To recursively search for files using grep, you will need the find
-and xargs utilities. These tools are present in most of the Unix and MacOS
-installations.  For MS-Windows systems, you can download the GNU grep and find
-utilities from the following sites:
+utilities. These tools are present in most of the Unix and MacOS installations.
+For MS-Windows systems, you can download the GNU grep utility from the following
+site:
 
     http://gnuwin32.sourceforge.net/packages/grep.htm
-    http://gnuwin32.sourceforge.net/packages/findutils.htm
 
 On MS-Windows, you can use the findstr utility to search for patterns.
 This is available by default on all MS-Windows systems.
@@ -66,8 +64,3 @@ Sift | https://sift-tool.org | :Sift
 Platinum Searcher | https://github.com/monochromegane/the_platinum_searcher | :Ptgrep
 Universal Code Grep | https://gvansickle.github.io/ucg | :Ucgrep
 agrep | https://www.tgries.de/agrep | :Agrep
-
-The ripgrep, silver searcher, git grep, ack, sift, platinum searcher and
-universal code grep utilities can search for a pattern recursively
-across directories without using any other additional utilities like
-find and xargs.
