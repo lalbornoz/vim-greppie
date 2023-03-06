@@ -632,14 +632,17 @@ func! grep#complete(ArgLead, CmdLine, CursorPos) abort
     let pattern_len = len(pattern)
 
     if pattern_len == 0
-	let pattern = "*"
-    elseif (pattern[pattern_len - 1] == '/')
-	let pattern = pattern . "*"
+	let pattern = '*'
+    else
+	let pattern_last = fnamemodify(pattern, ':t')
+	if match(pattern_last, '\(\\\)\@<!\(?\|\*\)') == -1
+	    let pattern = pattern . '*'
+	endif
     endif
 
     for pname in glob(pattern, 0, 1)
 	if isdirectory(pname)
-	    let pname = pname . "/"
+	    let pname = pname . '/'
 	endif
 	let candidates = candidates + [escape(fnameescape(pname), '&()')]
     endfor
