@@ -344,11 +344,11 @@ func! grep#cmd_output_cb(qf_id, channel, msg) abort
 	endif
 
 	call setqflist([], 'a', {'id' : a:qf_id,
-		    \ 'efm' : '%f:%\s%#%l:%m',
+		    \ 'efm' : '%f:%\s%#%l:%m,%f:%\s%#%l:',
 		    \ 'lines' : [a:msg]})
     else
 	let old_efm = &efm
-	set efm=%f:%\\s%#%l:%m
+	set efm=%f:%\\s%#%l:%m,%f:%\\s%#%l:
 	caddexpr a:msg . "\n"
 	let &efm = old_efm
     endif
