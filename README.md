@@ -25,9 +25,6 @@ Grep\_Xargs\_Options
 Grep\_Cygwin\_Find  
 Grep\_Shell\_Escape\_Char
 
-N.B.	Due to Vim limitations, filenames containing special Shell characters
-such as: &, (, ), \*, ?, [, ], \`, $ must be escaped manually.
-
 Plugin to integrate various grep like search tools with Vim.
 
 The grep plugin integrates grep like utilities (grep, fgrep, egrep, agrep,

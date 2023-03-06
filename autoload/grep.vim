@@ -1,6 +1,6 @@
 " File: grep.vim
 " Author: Yegappan Lakshmanan  (yegappan AT yahoo DOT com), Lucía Andrea Illanes Albornoz  (lucia AT luciaillanes DOT de)
-" Version: 3.11
+" Version: 3.11 for Workgroups
 " Last Modified: March 6, 2023
 " 
 " Plugin to integrate grep like utilities with Vim
@@ -623,6 +623,29 @@ func! s:getListOfArgFiles() abort
 
     return filenames
 endfunc
+
+" grep#complete()
+" Customised completion scheme (customlist) function for script commands
+func! grep#complete(ArgLead, CmdLine, CursorPos) abort
+    let candidates = []
+    let pattern = a:ArgLead
+    let pattern_len = len(pattern)
+
+    if pattern_len == 0
+	let pattern = "*"
+    elseif (pattern[pattern_len - 1] == '/')
+	let pattern = pattern . "*"
+    endif
+
+    for pname in glob(pattern, 0, 1)
+	if isdirectory(pname)
+	    let pname = pname . "/"
+	endif
+	let candidates = candidates + [escape(fnameescape(pname), '&()')]
+    endfor
+
+    return candidates
+endfunc!
 
 " grep#runGrepRecursive()
 " Run specified grep command recursively
