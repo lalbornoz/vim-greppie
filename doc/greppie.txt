@@ -421,41 +421,29 @@ synchronously, then you can set the 'Grep_Run_Async' variable to 1.
 						*vim-greppie-key-mappings*
 5. Key mappings in output window~
 
-The following plugin-specific mappings local to output windows are available;
-no defaults are provided:
+The following plugin-specific mappings local to output windows are available:
 
-<Plug>(OpenGrepResult)
+<Enter>, o, O
 Open currently selected search result in previous window.
 
-<Plug>(OpenGrepResultCloseQuickfix)
+<Alt> o, <Alt> O
 Open currently selected search result in previous window
 and close Grep output window.
 
-<Plug>(OpenGrepResultSplit)
+s
 Open currently selected search result in new split window.
 
-<Plug>(OpenGrepResultSplitCloseQuickfix)
+<Alt> s
 Open currently selected search result in new split window
 and close Grep output window.
 
-<Plug>(OpenGrepResultVSplit)
+S
 Open currently selected search result in new vertically split
 window.
 
-<Plug>(OpenGrepResultVSplitCloseQuickfix)
+<Alt> S
 Open currently selected search result in new vertically split
 window and close Grep output window.
-
-These may be mapped in your .vimrc or any other file included thereby by e.g.:
-
-map <Enter>	<Plug>(OpenGrepResult)
-map o		<Plug>(OpenGrepResult)
-map O		<Plug>(OpenGrepResultCloseQuickfix)
-map <Alt>o	<Plug>(OpenGrepResultCloseQuickfix)
-map s		<Plug>(OpenGrepResultSplit)
-map <Alt>s	<Plug>(OpenGrepResultSplitCloseQuickfix)
-map S		<Plug>(OpenGrepResultVSplit)
-map <Alt>S	<Plug>(OpenGrepResultVSplitCloseQuickfix)
 
 ==============================================================================
 
