@@ -479,7 +479,7 @@ func! s:openInWindow(closefl, currentfl, verticalfl) abort
 
     execute("e! " . fname)
     execute("normal! " . item['lnum'] . "G")
-    execute("normal! zt")
+    execute("normal! zz")
 
     if a:closefl
         cclose
