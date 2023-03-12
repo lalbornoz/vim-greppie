@@ -660,20 +660,21 @@ endfunc!
 " Run specified grep command recursively
 func! grep#runGrepRecursive(cmd_name, grep_cmd, action, ...) abort
     let grep_cmd = a:grep_cmd
+    let grep_args = "-R " . a:000[0]
 
     if g:Grep_Skip_Dirs != ''
 	for one_dir in split(g:Grep_Skip_Dirs, ' ')
-	    let grep_cmd = "--exclude-dir=" . shellescape(one_dir) . " " . grep_cmd
+	    let grep_args = grep_args . " --exclude-dir=" . shellescape(one_dir)
 	endfor
     endif
 
     if g:Grep_Skip_Files != ''
 	for one_file in split(g:Grep_Skip_Files, ' ')
-	    let grep_cmd = "--exclude=" . shellescape(one_file) . " " . grep_cmd
+	    let grep_args = grep_args . " --exclude=" . shellescape(one_file)
 	endfor
     endif
 
-    call s:runGrepCmd(a:cmd_name, grep_cmd, a:000[0], a:action)
+    call s:runGrepCmd(a:cmd_name, grep_cmd, grep_args, a:action)
 endfunc
 
 " grep#runGrepSpecial()
